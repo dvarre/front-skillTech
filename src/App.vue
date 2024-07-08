@@ -47,6 +47,7 @@ const skillList: Skill[] = [] = [
       </v-row>
     </div>
   </v-container>
+  <router-view></router-view>
 
 </template>
 
