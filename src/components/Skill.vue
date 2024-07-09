@@ -24,6 +24,11 @@ export default {
       required: true,
       type: String,
     }
+  },
+  methods: {
+    redirectToCourse(){
+      this.$router.push("/courses");
+    }
   }
 }
 </script>
@@ -35,7 +40,8 @@ export default {
 <template>
   <v-card
       class="card-container"
-      hover>
+      hover
+      @click="redirectToCourse">
     <v-card-item >
       <v-card-title>
         {{ title }}
@@ -68,7 +74,6 @@ export default {
   align-items: center;
   width: 200px;
   height: 200px;
-
 }
 
 .logo{
@@ -87,4 +92,6 @@ export default {
   max-height: calc(1.5em * 2);
   white-space: normal;
 }
+
+
 </style>
