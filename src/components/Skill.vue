@@ -8,6 +8,10 @@ export default {
     }
   },
   props: {
+    id: {
+      required: true,
+      type: Number,
+    },
     title: {
       required: true,
       type: String,
@@ -26,8 +30,8 @@ export default {
     }
   },
   methods: {
-    redirectToCourse(){
-      this.$router.push("/courses");
+    redirectToCourseDashboard(skillId: number){
+      this.$router.push("/course/" + skillId);
     }
   }
 }
@@ -41,7 +45,7 @@ export default {
   <v-card
       class="card-container"
       hover
-      @click="redirectToCourse">
+      @click="redirectToCourseDashboard(id)">
     <v-card-item >
       <v-card-title>
         {{ title }}
