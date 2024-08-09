@@ -8,6 +8,8 @@
 import router from "../routes.ts";
 import { SkillInterface } from "../interfaces/SkillInterface.ts";
 import Skill from "../components/Skill.vue";
+import Pagination from "../components/Pagination.vue";
+import {ref} from "vue";
 
 
 const skillList: SkillInterface[] = [
@@ -26,10 +28,21 @@ const redirectToCourseDashboard = function(skillId: number) : void {
   router.push({ path: '/courseDashboard/' + skillId });
 }
 
+const currentPage = ref(1);
+const totalElements = ref(100);
+const pageSize = ref(10);
+const updatePage = function(page: number, size: number) {
+  currentPage.value = page;
+  pageSize.value = size;
+  //TODO Fetch les data avec la nouvelle page et taille de page
+
+}
+
 </script>
 
 <template>
   <!-- Ajouter la navbar -->
+  <h1>Bienvenue sur le dashboard des skills</h1>
   <!-- Ajouter la searching bar -->
 
   <v-container>
@@ -48,8 +61,9 @@ const redirectToCourseDashboard = function(skillId: number) : void {
       </v-row>
     </div>
   </v-container>
-
   <!-- Ajouter la pagination -->
+<!--  <pagination :total-data="100" :modelValue="currentPage" @update:modelValue="(newValue) => (currentPage = newValue)"></pagination>-->
+  <pagination :totalElements="totalElements" :pageSize="pageSize" :currentPage="currentPage" @updatePage="updatePage"></pagination>
 
 </template>
 
