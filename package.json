@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "three": "^0.134.0",
+    "troisjs": "^0.3.4",
     "vue": "^3.4.29",
     "vue-router": "^4.4.0",
     "vuetify": "^3.6.10"
