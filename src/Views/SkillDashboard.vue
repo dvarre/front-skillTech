@@ -9,7 +9,8 @@ import router from "../routes.ts";
 import { SkillInterface } from "../interfaces/SkillInterface.ts";
 import Skill from "../components/Skill.vue";
 import Pagination from "../components/Pagination.vue";
-import {ref} from "vue";
+import {Ref, ref} from "vue";
+import SearchingBar from "../components/SearchingBar.vue";
 
 
 const skillList: SkillInterface[] = [
@@ -21,16 +22,21 @@ const skillList: SkillInterface[] = [
   {id:6, name: "Maven", description: "Facilitez vous la gestion de dépendances", subtitle: "Informatique", logoPath: "src/assets/logos/java.png"},
   {id:7, name: "JDBC Template", description: "Apprennez à connecter facilement vos projets à une BDD", subtitle: "Informatique", logoPath: "src/assets/logos/java.png"},
   {id:8, name: "React", description: "Plongez à la découverte d'une librairie front end époustoufflante", subtitle: "Informatique", logoPath: "src/assets/logos/java.png"},
-  {id:9, name: "Plus d'inspiration", description: "Je n'ai plus d'inspiration inspiration ekojsjlnwclelnwlnelkcwlnen lkelwkjkl lkew lkcj lwejc wleaù aùx aù xùe", subtitle: "Informatique", logoPath: "src/assets/logos/java.png"},
+  {id:9, name: "Plus d'inspiration", description: "Je n'ai plus d'inspiration ekojsjlnwclelnwlnelkcwlnen lkelwkjkl lkew lkcj lwejc wleaù aùx aù xùe", subtitle: "Informatique", logoPath: "src/assets/logos/java.png"},
 ]
 
 const redirectToCourseDashboard = function(skillId: number) : void {
   router.push({ path: '/courseDashboard/' + skillId });
 }
 
+const searchingValue: Ref<string> = ref("");
 const currentPage = ref(1);
 const totalElements = ref(100);
 const pageSize = ref(10);
+const updateSearch = function (value:string) {
+  searchingValue.value = value;
+  currentPage.value = 1;
+}
 const updatePage = function(page: number, size: number) {
   currentPage.value = page;
   pageSize.value = size;
@@ -44,7 +50,8 @@ const updatePage = function(page: number, size: number) {
   <!-- Ajouter la navbar -->
   <h1>Bienvenue sur le dashboard des skills</h1>
   <!-- Ajouter la searching bar -->
-
+  <searching-bar @update:inputValue="updateSearch"></searching-bar>
+  Valeur de la recherche : {{searchingValue}}
   <v-container>
     <div style="display: flex;justify-content: center; text-align: center;">
       <v-row cols="4">
